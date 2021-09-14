@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zencastr
+  labels:
+    app: zencastr
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: zencastr
+  template:
+    metadata:
+      labels:
+        app: zencastr
+    spec:
+      containers:
+      - name: zencastr
+        image: "taxtgg/zencastr:1.0"
+        imagePullPolicy: Always
+        env:
+        - name: MONGO_HOST
+          value: "mongodb"
+        - name: MONGO_PORT
+          value: "27017"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 5000
+          name: zencastr-http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zencastr
+  labels:
+    app: zencastr
+spec:
+  ports:
+  - port: 80
+    targetPort: zencastr-http
+  selector:
+    app: zencastr
+

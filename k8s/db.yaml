@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        tier: backend
+    spec:
+      containers:
+      - name: mongodb
+        image: "docker.io/mongo:4.2.16"
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 27017
+          name: mongodb-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+    tier: backend
+spec:
+  ports:
+  - port: 27017
+    targetPort: mongodb-port
+  selector:
+    app: mongodb
+    tier: backend
+
