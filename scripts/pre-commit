@@ -1,0 +1,11 @@
+#!/bin/sh
+
+exec 1>&2
+PYTHONPATH=.:./zencastr pipenv run pytest
+if [ $? -ne 0 ]
+then
+	cat <<\EOF
+Error: Auto-tests failed!!! Fix your code before commiting!
+EOF
+	exit 1
+fi

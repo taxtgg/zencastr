@@ -16,3 +16,11 @@ mongomock = "*"
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+build="sh scripts/builddocker.sh"
+test="bash -c 'PYTHONPATH=.:./zencastr pipenv run pytest'"
+dev-init="cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit"
+dev-start="bash -c 'if [ $(docker ps | grep zencastr-bd | wc -l) == 0 ] ; then docker run -d --rm -p 27017:27017 --name zencastr-bd mongo; fi'"
+dev-stop="bash -c 'if [ $(docker ps | grep zencastr-bd | wc -l) -gt 0 ] ; then docker kill zencastr-bd; fi'"
+
