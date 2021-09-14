@@ -1,5 +1,4 @@
 import pymongo
-import mongomock
 import config
 
 DATABASE_NAME = "castr"
