@@ -42,3 +42,17 @@ kubectl port-forward svc/zencastr 8080:80
 ```
 
 The Swagger is on URL `/docs`. Enjoy!
+
+Improvements
+------------
+The list of possible improvements includes:
+- Secure Mongo (Good tutorial [here](https://www.cloudytuts.com/guides/kubernetes/how-to-deploy-mongodb-on-kubernetes/))
+- Unify scripts in [Click](https://click.palletsprojects.com/en/8.0.x/) based cli
+- Add better health check endpoint (for example using [this](https://github.com/Kludex/fastapi-health))
+- Add better DB connection testing
+- Add Prometheus metrics exporter (using [this](https://pythonrepo.com/repo/stephenhillier-starlette_exporter-python-fastapi-utilities) or [this](https://pythonrepo.com/repo/trallnag-prometheus-fastapi-instrumentator-python-fastapi-utilities))
+- 
+
+ 
+
+
